@@ -1,13 +1,13 @@
 @extends('layout')
 
 @section('content')
-    <form action="{{ route('update-profile') }}" method="POST" enctype="multipart/form-data" class="flex flex-col m-auto max-w-md gap-4">
+    <form action="{{ route('update-profile') }}" method="POST" enctype="multipart/form-data" class="grid m-auto max-w-md w-200 gap-4">
         @csrf
         @method('PUT') {{-- Supaya request dikenali sebagai PUT oleh Laravel --}}
 
         {{-- Profile Picture --}}
-        <div class="flex flex-col items-center mb-4">
-            <div class="w-24 h-24 rounded-full bg-neutral text-white flex items-center justify-center text-3xl font-bold overflow-hidden relative">
+        <div class="grid items-center mb-4">
+            <div class="w-24 h-24 m-auto rounded-full bg-neutral text-white flex items-center justify-center text-3xl font-bold overflow-hidden relative">
                 <img id="profilePreview" 
                      src="{{ auth()->user()->profile_picture ? asset('storage/' . auth()->user()->profile_picture) : '' }}" 
                      alt="Profile" 
@@ -19,34 +19,33 @@
                     </span>
                 @endif
             </div>
-            <label class="mt-2 text-sm">Update Profile Picture</label>
-            <input type="file" name="profile_picture" class="file-input file-input-bordered file-input-sm mt-1" onchange="previewProfilePicture(event)" />
+            <input type="file" name="profile_picture" class="file-input w-full file-input-bordered file-input-sm mt-5" onchange="previewProfilePicture(event)" />
         </div>
 
         {{-- Nama --}}
         <label class="label">Nama</label>
-        <input type="text" name="nama" placeholder="Nama" value="{{ old('nama', auth()->user()->name) }}" class="input input-bordered" />
+        <input type="text" name="nama" placeholder="Nama" value="{{ old('nama', auth()->user()->name) }}" class="input input-bordered w-full" />
         @error('nama')
             <div class="text-red-500 text-sm">{{ $message }}</div>
         @enderror
 
         {{-- Username --}}
         <label class="label">Username</label>
-        <input type="text" name="username" placeholder="Username" value="{{ old('username', auth()->user()->username) }}" class="input input-bordered" />
+        <input type="text" name="username" placeholder="Username" value="{{ old('username', auth()->user()->username) }}" class="input input-bordered w-full" />
         @error('username')
             <div class="text-red-500 text-sm">{{ $message }}</div>
         @enderror
 
         {{-- Email --}}
         <label class="label">Email</label>
-        <input type="text" name="email" placeholder="Email" value="{{ old('email', auth()->user()->email) }}" class="input input-bordered" />
+        <input type="text" name="email" placeholder="Email" value="{{ old('email', auth()->user()->email) }}" class="input input-bordered w-full" />
         @error('email')
             <div class="text-red-500 text-sm">{{ $message }}</div>
         @enderror
 
         {{-- Password --}}
         <label class="label">Password</label>
-        <input type="password" name="password" placeholder="Password" class="input input-bordered" />
+        <input type="password" name="password" placeholder="Password" class="input input-bordered w-full" />
         @error('password')
             <div class="text-red-500 text-sm">{{ $message }}</div>
         @enderror

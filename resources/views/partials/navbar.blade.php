@@ -37,7 +37,7 @@
                     <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4">
                         <!-- Sidebar content here -->
                         <li><a wire:navigate href="{{ route('dashboard') }}">Dashboard</a></li>
-                        <li><a wire:navigate href="{{ route('show-post') }}">Upload</a></li>
+                        <li><a wire:navigate href="{{ route('show.post') }}">Upload</a></li>
                         <li><a wire:navigate href="{{ route('profile') }}">Profile</a></li>
                         <div class="divider"></div>
                         <li><a wire:navigate href="{{ route('logout') }}">Logout</a></li>

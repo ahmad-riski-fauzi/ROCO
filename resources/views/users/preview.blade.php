@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-<div class="max-w-3xl mx-auto py-10 px-4">
+<div class="w-173 mx-auto py-10 px-4">
      @if (session('success'))
             <div role="alert" class="alert justify-center items-center alert-success">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
@@ -32,26 +32,27 @@
 
     <div class="divider"></div>
 
-    <div class="space-y-4">
+    <div class="grid grid-cols-3 gap-4">
     @forelse ($user->posts as $post)
-        <div class="bg-base-200 rounded shadow">
+        <div class="card shadow-xl">
             
-            {{-- Tambahkan gambar postingan --}}
-            @if ($post->image)
-                <img src="{{ asset('storage/' . $post->image) }}"
-                     alt="{{ $post->title }}"
-                     class="w-full max-h-64 object-cover rounded mb-3">
-            @endif
+                @if ($post->image)
+
+                    <img src="{{ asset('storage/' . $post->image) }}"
+                         alt="{{ $post->title }}"
+                         class="w-full h-full object-cover rounded-xl mb-3">
+                    <a href="{{ route('users.posts.show', ['user' => $post->user->username, 'post' => $post->slug]) }}">
+                        <h2 class="text-lg font-semibold text-white">
+                            {{ $post->title }}
+                        </h2>
+
+                        <p class="text-gray-400 text-xs">{{ $post->created_at->diffForHumans() }}</p>
+                        <p class="mt-4 text-gray-300 text-sm">{{ Str::limit($post->description, 150) }}</p>
+                    </a>
+                @endif
+
 
             <div class="p-3">
-                <a href="{{ route('users.posts.show', ['user' => $post->user->username, 'post' => $post->slug]) }}">
-                    <h2 class="text-lg font-semibold text-white">
-                        {{ $post->title }}
-                    </h2>
-
-                    <p class="text-gray-400 text-sm">{{ $post->created_at->diffForHumans() }}</p>
-                    <p class="mt-4 text-gray-300">{{ Str::limit($post->description, 150) }}</p>
-                </a>
 
                     @if(Auth::user()->role === 'admin')
                     <form action="{{ route('admin.posts.destroy', $post->user->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus postingan dari pengguna ini?')">

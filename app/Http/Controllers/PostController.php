@@ -17,12 +17,12 @@ class PostController extends Controller
     public function show(string $slug)
     {
         $post = Post::where('slug', $slug)
-            ->with([
-                'comments.user',           // komentar utama dan user-nya
-                'comments.replies.user',   // balasan komentar dan user-nya
-                'comments.replies.replies.user', // jika perlu nested lebih dalam
-            ])
-            ->firstOrFail();
+        ->with(['comments' => function($q) {
+            $q->whereNull('parent_id')
+              ->with(['user'])
+              ->latest(); // urutkan dari komentar terbaru
+        }])->firstOrFail();
+
 
         $title = $post->title;
         $user = $post->user->name ?? $post->user->username;

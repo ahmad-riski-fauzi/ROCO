@@ -3,7 +3,7 @@
 @section('content')
     <div class="hero bg-base-200 min-h-screen">
         <div class="hero-content flex-col">
-            <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+            <div class="card w-full max-w-sm shrink-0">
                 <div class="card-body">
                     <form action="{{ route('register') }}" method="POST" class="fieldset">
                         @csrf

@@ -14,7 +14,9 @@ class UserController extends Controller
             $query->latest(); // Urutkan postingan terbaru
         }])->where('username', $username)->firstOrFail();
 
-        $title = 'Posts |'.$user->name ?? $user->username;
+        $name = $user->name ?? $user->username;
+
+        $title = "Posts | $name";
 
         return view('users.preview', compact('user', 'title'));
     }

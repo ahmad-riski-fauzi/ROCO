@@ -23,5 +23,12 @@ class CommentController extends Controller
         ]);
 
         return back();
+
+    }
+
+    public function delete(string $id)
+    {
+        Comment::destroy($id);
+        return back();
     }
 }

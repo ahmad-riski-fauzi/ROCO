@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="min-h-screen bg-base-200 py-10 px-4">
-    <div class="max-w-xl mx-auto bg-base-100 shadow-xl rounded-xl p-8">
+    <div class="max-w-xl mx-auto rounded-xl p-8">
         <h1 class="text-2xl font-bold mb-6 text-center">Upload Post</h1>
 
         @if (session('status'))
@@ -20,7 +20,7 @@
             <div class="text-red-500">{{ $message }}</div>
         @enderror
 
-        <form action="{{ route('upload-post') }}" enctype="multipart/form-data" method="POST" class="space-y-4">
+        <form action="{{ route('posts.upload') }}" enctype="multipart/form-data" method="POST" class="space-y-4">
             @csrf
             @method('POST')
 
@@ -69,7 +69,7 @@
                 @enderror
             </div>
 
-            <div class="text-center">
+            <div class="text-center mt-10">
                 <button class="btn btn-neutral w-full">Upload</button>
             </div>
         </form>

@@ -12,9 +12,8 @@
 </head>
 <body>
     @include('partials.navbar')
-    <main class="flex flex-col min-h-screen bg-gray-900">
+    <main class="flex flex-col min-h-screen bg-base-100">
         @yield('content')
     </main>
-    @include('partials.footer')
 </body>
 </html>

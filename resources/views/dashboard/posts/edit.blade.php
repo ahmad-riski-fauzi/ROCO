@@ -79,7 +79,7 @@
 
                     {{-- Submit --}}
                     <div class="pt-4">
-                        <button class="btn btn-primary w-full">Update Post</button>
+                        <button type="submit" class="btn btn-primary w-full">Update Post</button>
                     </div>
                 </form>
             </div>

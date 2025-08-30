@@ -43,9 +43,9 @@ class DashboardPostController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255|unique:posts,title',
-            'description' => 'required|string',
-            'category_id' => 'required|exists:categories,id',
-            'image' => 'nullable|image|max:2048',
+            'description' => 'nullable|string',
+            'category_id' => 'nullable|exists:categories,id',
+            'image' => 'required|image|max:2048',
         ]);
 
         $validated['user_id'] = auth()->id();
@@ -66,8 +66,8 @@ class DashboardPostController extends Controller
 
         $validated = $request->validate([
             'title' => 'required|string|max:255|unique:posts,title,'.$post->id,
-            'description' => 'required|string',
-            'category_id' => 'required|exists:categories,id',
+            'description' => 'nullable|string',
+            'category_id' => 'nullable|exists:categories,id',
             'image' => 'nullable|image|max:2048',
         ]);
 

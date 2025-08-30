@@ -15,15 +15,30 @@
         {{-- Informasi Post --}}
         <div class="space-y-2">
             <p class="text-sm">{{ $post->created_at->diffForHumans() }}</p>
-            <h1 class="text-3xl font-bold">{{ $post->title }}</h1>
+            <h1 class="text-3xl font-bold">{{ $post->title }}
+                @if($post->category)
+                    <a href="{{ route('categories.show', $post->category->slug) }}" class="badge badge-soft badge-primary">{{ $post->category->name }}</a>
+                @endif
+            </h1>
             <p class="text-gray-300">{{ $post->description }}</p>
         </div>
 
         {{-- Meta --}}
-        <div class="text-sm text-gray-300 border-t border-gray-700 pt-4 space-y-1">
-            <p><span class="font-semibold">Category:</span> {{ $post->category->name }}</p>
-            <a href="{{ route('users.preview', $post->user->username) }}" class="font-semibold text-gray-300">
-                Author: <span class="hover:underline font-medium">{{ $post->user->username }}</span>
+        <div class="text-sm grid justify-end text-gray-300 pt-4 space-y-1">
+            <a href="{{ route('users.preview', $post->user->username) }}" class="font-semibold flex text-gray-300">
+                 <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <g
+                      stroke-linejoin="round"
+                      stroke-linecap="round"
+                      stroke-width="2.5"
+                      fill="none"
+                      stroke="currentColor"
+                    >
+                      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </g>
+                  </svg>
+            <span class="hover:underline font-medium">{{ $post->user->username }}</span>
         </a>
             {{-- <p><span class="font-semibold">Uploaded By:</span> {{ $post->user->username }}</p> --}}
         </div>
@@ -50,7 +65,7 @@
         {{-- Daftar Komentar --}}
         <div class="space-y-4">
             @foreach ($post->comments as $comment)
-                <x-comment :comment="$comment" />
+                <x-comment :comment="$comment"/>
             @endforeach
         </div>
     </div>
